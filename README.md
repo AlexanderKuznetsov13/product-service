@@ -5,7 +5,11 @@
     - [ ] draw UML diagram
     - [ ] check all fields and refactor
 - [ ] liquibase scripts for tables
-    - [ ] table1 
+    - [ ] product 
+    - [ ] currency 
+    - [ ] product_currency 
+    - [ ] language 
+    - [ ] name_description_translation 
 - [ ] add rest controller
 - [ ] \(Optional) define test sql queries
 - [ ] \(Optional) define prod sql queries
@@ -16,33 +20,80 @@
 
 <a name="db_schema_table_list"></a>
 ## DB Schema
-* [table_name1](#db_schema_table_name1)
-* [table_name2](#db_schema_table_name2)
+* [product](#db_schema_table_product)
+* [currency](#db_schema_table_currency)
+* [product_currency](#db_schema_table_product_currency)
+* [language](#db_schema_table_language)
+* [name_description_translation](#db_schema_table_name_description_translation)
 
 
-
-<a name="db_schema_table_name1"></a>
-### user
+<a name="db_schema_table_product"></a>
+### product
 [Back to table list](#db_schema_table_list)
 
-#### List of table1
+#### List of products
 
 | Name | Column      |     Type     | Nullable | Default | Example | Comments            |
-|------|-------------|:------------:|:--------:|---------|---------|---------------------|
-| user | id          |   INTEGER    |  false   |         |         | PRIMARY KEY         |
-| user | login       | VARCHAR(100) |  false   |         |         | PRIMARY KEY         |
+|------|-------------|:------------:|:--------:|---------|---------|--------------------|
+| product | id          |   INTEGER    |  false   |         |         | PRIMARY KEY         |
+| product | creation_date | TIMESTAMP |  false   |         |         | date of creation         |
+| product | last_modification_date| TIMESTAMP |  false   |         |         | last modification         |
 
 
-<a name="db_schema_table_name2"></a>
-### topic
+<a name="db_schema_table_currency"></a>
+### currency
 [Back to table list](#db_schema_table_list)
 
-#### List of table2
+#### List of currencies
 
 | Name  | Column      |     Type     | Nullable  | Default | Example | Comments      |
 |-------|-------------|:------------:|:---------:|---------|---------|---------------|
-| topic | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
-| topic | name        | VARCHAR(100) |   false   |         |         | Name of topic |
+| currency | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
+| currency | name        | VARCHAR(100) |   false   |         |         | Name of currency |
+
+
+<a name="db_schema_table_product_currency"></a>
+### product_currency
+[Back to table list](#db_schema_table_list)
+
+#### List of products with different currencies
+
+| Name  | Column      |     Type     | Nullable  | Default | Example | Comments      |
+|-------|-------------|:------------:|:---------:|---------|---------|---------------|
+| product_currency | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
+| product_currency | product_id          |   INTEGER    |   false   |         |         | product id   |
+| product_currency | currency_id          |   INTEGER    |   false   |         |         | currency id   |
+| product_currency | price        | NUMERIC(9,2) |   false   |         |         | price |
+
+
+
+<a name="db_schema_table_language"></a>
+### language
+[Back to table list](#db_schema_table_list)
+
+#### List of languages
+
+| Name  | Column      |     Type     | Nullable  | Default | Example | Comments      |
+|-------|-------------|:------------:|:---------:|---------|---------|---------------|
+| language | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
+| language | name        | VARCHAR(100) |   false   |         |         | Name of language |
+
+
+<a name="db_schema_table_name_description_translation"></a>
+### name_description_translation
+[Back to table list](#db_schema_table_list)
+
+#### List of translations for product name/description.
+
+| Name  | Column      |     Type     | Nullable  | Default | Example | Comments      |
+|-------|-------------|:------------:|:---------:|---------|---------|---------------|
+| name_description_translation | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
+| name_description_translation | product_id          |   INTEGER    |   false   |         |         | product id   |
+| name_description_translation | language_id          |   INTEGER    |   false   |         |         | language id   |
+| name_description_translation | name        | VARCHAR(100) |   false   |         |         | name of product |
+| name_description_translation | description        | VARCHAR(1000) |   false   |         |         | description of product |
+
+
 
 
 
