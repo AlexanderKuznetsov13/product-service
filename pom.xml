@@ -11,7 +11,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>ru.alex.kuznetsov.project</groupId>
+    <groupId>ru.alex.kuznetsov.project.product</groupId>
     <artifactId>product-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
