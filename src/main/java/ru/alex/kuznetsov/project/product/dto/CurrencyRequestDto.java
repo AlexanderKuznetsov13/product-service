@@ -3,20 +3,20 @@ package ru.alex.kuznetsov.project.product.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Язык")
-public class LanguageResponseDto {
+@Schema(description = "Валюта")
+public class CurrencyRequestDto {
 
-    @Schema(description = "ID языка")
+    @Schema(description = "ID валюты")
     private Integer id;
 
-    @Schema(description = "Название языка")
+    @Schema(description = "Название валюты")
     private String name;
 
 
-    public LanguageResponseDto() {
+    public CurrencyRequestDto() {
     }
 
-    public LanguageResponseDto(Integer id, String name) {
+    public CurrencyRequestDto(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -39,7 +39,7 @@ public class LanguageResponseDto {
 
     @Override
     public String toString() {
-        return "LanguageResponseDto{" +
+        return "CurrencyRequestDto{" +
                 "id=" + id +
                 ", name=" + name +
                 '}';
