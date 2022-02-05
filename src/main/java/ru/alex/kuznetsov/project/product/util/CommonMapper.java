@@ -1,12 +1,10 @@
 package ru.alex.kuznetsov.project.product.util;
 
 
-import ru.alex.kuznetsov.project.product.dto.CurrencyRequestDto;
-import ru.alex.kuznetsov.project.product.dto.CurrencyResponseDto;
-import ru.alex.kuznetsov.project.product.dto.LanguageRequestDto;
-import ru.alex.kuznetsov.project.product.dto.LanguageResponseDto;
+import ru.alex.kuznetsov.project.product.dto.*;
 import ru.alex.kuznetsov.project.product.entity.CurrencyEntity;
 import ru.alex.kuznetsov.project.product.entity.LanguageEntity;
+import ru.alex.kuznetsov.project.product.entity.ProductEntity;
 
 public class CommonMapper {
 
@@ -37,6 +35,23 @@ public class CommonMapper {
         CurrencyResponseDto responseDto = new CurrencyResponseDto();
         responseDto.setId(currency.getId());
         responseDto.setName(currency.getName());
+        return responseDto;
+    }
+
+    public static ProductEntity fromProductRequestDtoToProductEntity(ProductRequestDto requestDto) {
+        ProductEntity product = new ProductEntity();
+        product.setId(requestDto.getId());
+        product.setCreationDate(requestDto.getCreationDate());
+        product.setLastModificationDate(requestDto.getLastModificationDate());
+
+        return product;
+    }
+
+    public static ProductResponseDto fromProductEntityToProductResponseDto(ProductEntity product) {
+        ProductResponseDto responseDto = new ProductResponseDto();
+        responseDto.setId(product.getId());
+        responseDto.setCreationDate(product.getCreationDate());
+        responseDto.setLastModificationDate(product.getLastModificationDate());
         return responseDto;
     }
 
