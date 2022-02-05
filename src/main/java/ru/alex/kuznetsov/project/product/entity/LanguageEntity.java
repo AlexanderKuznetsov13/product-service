@@ -2,6 +2,7 @@ package ru.alex.kuznetsov.project.product.entity;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "language")
@@ -14,7 +15,16 @@ public class LanguageEntity {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "languageNameDescriptionTranslationEntity")
+    private Set<NameDescriptionTranslationEntity> nameDescriptionTranslations;
+
     public LanguageEntity(){
+    }
+
+    public LanguageEntity(Integer id, String name, Set<NameDescriptionTranslationEntity> nameDescriptionTranslations) {
+        this.id = id;
+        this.name = name;
+        this.nameDescriptionTranslations = nameDescriptionTranslations;
     }
 
     public LanguageEntity(Integer id, String name) {
@@ -36,5 +46,13 @@ public class LanguageEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<NameDescriptionTranslationEntity> getNameDescriptionTranslations() {
+        return nameDescriptionTranslations;
+    }
+
+    public void setNameDescriptionTranslations(Set<NameDescriptionTranslationEntity> nameDescriptionTranslations) {
+        this.nameDescriptionTranslations = nameDescriptionTranslations;
     }
 }

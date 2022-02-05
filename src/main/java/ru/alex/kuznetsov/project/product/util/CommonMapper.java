@@ -4,6 +4,7 @@ package ru.alex.kuznetsov.project.product.util;
 import ru.alex.kuznetsov.project.product.dto.*;
 import ru.alex.kuznetsov.project.product.entity.CurrencyEntity;
 import ru.alex.kuznetsov.project.product.entity.LanguageEntity;
+import ru.alex.kuznetsov.project.product.entity.NameDescriptionTranslationEntity;
 import ru.alex.kuznetsov.project.product.entity.ProductEntity;
 
 public class CommonMapper {
@@ -54,6 +55,26 @@ public class CommonMapper {
         responseDto.setLastModificationDate(product.getLastModificationDate());
         return responseDto;
     }
+
+
+    public static NameDescriptionTranslationEntity fromNameDescriptionTranslationRequestDtoToNameDescriptionTranslationEntity(NameDescriptionTranslationRequestDto requestDto) {
+        NameDescriptionTranslationEntity nameDescriptionTranslation = new NameDescriptionTranslationEntity();
+        nameDescriptionTranslation.setId(requestDto.getId());
+        nameDescriptionTranslation.setName(requestDto.getName());
+        nameDescriptionTranslation.setDescription(requestDto.getDescription());
+
+        return nameDescriptionTranslation;
+    }
+
+    public static NameDescriptionTranslationResponseDto fromNameDescriptionTranslationEntityToNameDescriptionTranslationResponseDto(NameDescriptionTranslationEntity nameDescriptionTranslation) {
+        NameDescriptionTranslationResponseDto responseDto = new NameDescriptionTranslationResponseDto();
+        responseDto.setId(nameDescriptionTranslation.getId());
+        responseDto.setName(nameDescriptionTranslation.getName());
+        responseDto.setDescription(nameDescriptionTranslation.getDescription());
+        return responseDto;
+    }
+
+
 
     
 }

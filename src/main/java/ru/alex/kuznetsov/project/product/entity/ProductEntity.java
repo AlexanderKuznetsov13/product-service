@@ -3,6 +3,7 @@ package ru.alex.kuznetsov.project.product.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -18,13 +19,17 @@ public class ProductEntity {
     @Column(name = "last_modification_date")
     private LocalDateTime lastModificationDate;
 
+    @OneToMany(mappedBy = "productNameDescriptionTranslationEntity")
+    private Set<NameDescriptionTranslationEntity> nameDescriptionTranslations;
+
     public ProductEntity(){
     }
 
-    public ProductEntity(Integer id, LocalDateTime creationDate, LocalDateTime lastModificationDate) {
+    public ProductEntity(Integer id, LocalDateTime creationDate, LocalDateTime lastModificationDate, Set<NameDescriptionTranslationEntity> nameDescriptionTranslations) {
         this.id = id;
         this.creationDate = creationDate;
         this.lastModificationDate = lastModificationDate;
+        this.nameDescriptionTranslations = nameDescriptionTranslations;
     }
 
     public Integer getId() {
@@ -49,5 +54,13 @@ public class ProductEntity {
 
     public void setLastModificationDate(LocalDateTime lastModificationDate) {
         this.lastModificationDate = lastModificationDate;
+    }
+
+    public Set<NameDescriptionTranslationEntity> getNameDescriptionTranslations() {
+        return nameDescriptionTranslations;
+    }
+
+    public void setNameDescriptionTranslations(Set<NameDescriptionTranslationEntity> nameDescriptionTranslations) {
+        this.nameDescriptionTranslations = nameDescriptionTranslations;
     }
 }
