@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="2022_02_05_2130_create_sequence_product_currency_seq" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="f">
+                select dbu_sequence_exists('product_currency_seq', 'product')
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE product.product_currency_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2022_02_05_2130_create_table_product_currency_for_product" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product_currency" schemaName="product"/>
+            </not>
+            <sequenceExists sequenceName="product_currency_seq" schemaName="product"/>
+            <not>
+                <primaryKeyExists primaryKeyName="product_currency_id_pk" tableName="product_currency" schemaName="product"/>
+            </not>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="product_currency_product_id_fk"/>
+            </not>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="product_currency_currency_id_fk"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE product.product_currency (
+                 id              INTEGER NOT NULL DEFAULT nextval('product.product_currency_seq'),
+                 product_id             INTEGER    NOT NULL,
+                 currency_id             INTEGER    NOT NULL,
+                 price             NUMERIC(9,2)    NOT NULL,
+
+                 CONSTRAINT product_currency_id_pk PRIMARY KEY (id),
+                 CONSTRAINT product_currency_product_id_fk FOREIGN KEY (product_id) REFERENCES product.product (id),
+                 CONSTRAINT product_currency_currency_id_fk FOREIGN KEY (currency_id) REFERENCES product.currency (id)
+            );
+
+            COMMENT ON TABLE product.product_currency IS 'List of products with different currencies';
+            COMMENT ON COLUMN product.product_currency.product_id IS 'ID of product';
+            COMMENT ON COLUMN product.product_currency.currency_id IS 'ID of currency';
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

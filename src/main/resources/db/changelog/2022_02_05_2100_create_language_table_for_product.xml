@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="2022_02_05_2100_create_sequence_language_seq" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="f">
+                select dbu_sequence_exists('language_seq', 'product')
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE product.language_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2022_02_05_2100_create_table_language_for_product" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="language" schemaName="product"/>
+            </not>
+            <sequenceExists sequenceName="language_seq" schemaName="product"/>
+            <not>
+                <primaryKeyExists primaryKeyName="language_id_pk" tableName="language" schemaName="product"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE product.language (
+                 id              INTEGER NOT NULL DEFAULT nextval('product.language_seq'),
+                 name             VARCHAR(100)    NOT NULL,
+
+                 CONSTRAINT language_id_pk PRIMARY KEY (id)
+            );
+
+            COMMENT ON TABLE product.language IS 'List of languages';
+            COMMENT ON COLUMN product.language.id IS 'ID';
+            COMMENT ON COLUMN product.language.name IS 'Name of language';
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
