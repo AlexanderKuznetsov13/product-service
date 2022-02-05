@@ -21,21 +21,21 @@ public class NameDescriptionTranslationEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
-    private ProductEntity productNameDescriptionTranslationEntity;
+    private ProductEntity productNameDescriptionTranslation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "language_id", nullable = false)
-    private LanguageEntity languageNameDescriptionTranslationEntity;
+    private LanguageEntity languageNameDescriptionTranslation;
 
     public NameDescriptionTranslationEntity(){
     }
 
-    public NameDescriptionTranslationEntity(Integer id, String name, String description, ProductEntity productNameDescriptionTranslationEntity, LanguageEntity languageNameDescriptionTranslationEntity) {
+    public NameDescriptionTranslationEntity(Integer id, String name, String description, ProductEntity productNameDescriptionTranslation, LanguageEntity languageNameDescriptionTranslation) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.productNameDescriptionTranslationEntity = productNameDescriptionTranslationEntity;
-        this.languageNameDescriptionTranslationEntity = languageNameDescriptionTranslationEntity;
+        this.productNameDescriptionTranslation = productNameDescriptionTranslation;
+        this.languageNameDescriptionTranslation = languageNameDescriptionTranslation;
     }
 
     public Integer getId() {
@@ -62,19 +62,19 @@ public class NameDescriptionTranslationEntity {
         this.description = description;
     }
 
-    public ProductEntity getProductNameDescriptionTranslationEntity() {
-        return productNameDescriptionTranslationEntity;
+    public ProductEntity getProductNameDescriptionTranslation() {
+        return productNameDescriptionTranslation;
     }
 
-    public void setProductNameDescriptionTranslationEntity(ProductEntity productNameDescriptionTranslationEntity) {
-        this.productNameDescriptionTranslationEntity = productNameDescriptionTranslationEntity;
+    public void setProductNameDescriptionTranslation(ProductEntity productNameDescriptionTranslation) {
+        this.productNameDescriptionTranslation = productNameDescriptionTranslation;
     }
 
-    public LanguageEntity getLanguageNameDescriptionTranslationEntity() {
-        return languageNameDescriptionTranslationEntity;
+    public LanguageEntity getLanguageNameDescriptionTranslation() {
+        return languageNameDescriptionTranslation;
     }
 
-    public void setLanguageNameDescriptionTranslationEntity(LanguageEntity languageNameDescriptionTranslationEntity) {
-        this.languageNameDescriptionTranslationEntity = languageNameDescriptionTranslationEntity;
+    public void setLanguageNameDescriptionTranslation(LanguageEntity languageNameDescriptionTranslation) {
+        this.languageNameDescriptionTranslation = languageNameDescriptionTranslation;
     }
 }

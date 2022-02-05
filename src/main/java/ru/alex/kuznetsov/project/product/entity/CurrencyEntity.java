@@ -2,6 +2,7 @@ package ru.alex.kuznetsov.project.product.entity;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "currency")
@@ -13,6 +14,9 @@ public class CurrencyEntity {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "currencyProductCurrencyEntity")
+    private Set<ProductCurrencyEntity> productCurrencies;
 
     public CurrencyEntity(){
     }

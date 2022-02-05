@@ -2,10 +2,7 @@ package ru.alex.kuznetsov.project.product.util;
 
 
 import ru.alex.kuznetsov.project.product.dto.*;
-import ru.alex.kuznetsov.project.product.entity.CurrencyEntity;
-import ru.alex.kuznetsov.project.product.entity.LanguageEntity;
-import ru.alex.kuznetsov.project.product.entity.NameDescriptionTranslationEntity;
-import ru.alex.kuznetsov.project.product.entity.ProductEntity;
+import ru.alex.kuznetsov.project.product.entity.*;
 
 public class CommonMapper {
 
@@ -71,6 +68,21 @@ public class CommonMapper {
         responseDto.setId(nameDescriptionTranslation.getId());
         responseDto.setName(nameDescriptionTranslation.getName());
         responseDto.setDescription(nameDescriptionTranslation.getDescription());
+        return responseDto;
+    }
+
+    public static ProductCurrencyEntity fromProductCurrencyRequestDtoToProductCurrencyEntity(ProductCurrencyRequestDto requestDto) {
+        ProductCurrencyEntity productCurrency = new ProductCurrencyEntity();
+        productCurrency.setId(requestDto.getId());
+        productCurrency.setPrice(requestDto.getPrice());
+
+        return productCurrency;
+    }
+
+    public static ProductCurrencyResponseDto fromProductCurrencyEntityToProductCurrencyResponseDto(ProductCurrencyEntity productCurrency) {
+        ProductCurrencyResponseDto responseDto = new ProductCurrencyResponseDto();
+        responseDto.setId(productCurrency.getId());
+        responseDto.setPrice(productCurrency.getPrice());
         return responseDto;
     }
 

@@ -63,7 +63,7 @@
 | product_currency | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
 | product_currency | product_id          |   INTEGER    |   false   |         |         | product id   |
 | product_currency | currency_id          |   INTEGER    |   false   |         |         | currency id   |
-| product_currency | price        | NUMERIC(9,2) |   false   |         |         | price |
+| product_currency | price        | REAL |   false   |         |         | price |
 
 
 

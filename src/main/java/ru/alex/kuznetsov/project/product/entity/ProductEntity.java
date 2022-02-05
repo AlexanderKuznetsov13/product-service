@@ -19,17 +19,21 @@ public class ProductEntity {
     @Column(name = "last_modification_date")
     private LocalDateTime lastModificationDate;
 
-    @OneToMany(mappedBy = "productNameDescriptionTranslationEntity")
+    @OneToMany(mappedBy = "productNameDescriptionTranslation")
     private Set<NameDescriptionTranslationEntity> nameDescriptionTranslations;
+
+    @OneToMany(mappedBy = "productProductCurrency")
+    private Set<ProductCurrencyEntity> productCurrencies;
 
     public ProductEntity(){
     }
 
-    public ProductEntity(Integer id, LocalDateTime creationDate, LocalDateTime lastModificationDate, Set<NameDescriptionTranslationEntity> nameDescriptionTranslations) {
+    public ProductEntity(Integer id, LocalDateTime creationDate, LocalDateTime lastModificationDate, Set<NameDescriptionTranslationEntity> nameDescriptionTranslations, Set<ProductCurrencyEntity> productCurrencies) {
         this.id = id;
         this.creationDate = creationDate;
         this.lastModificationDate = lastModificationDate;
         this.nameDescriptionTranslations = nameDescriptionTranslations;
+        this.productCurrencies = productCurrencies;
     }
 
     public Integer getId() {
@@ -62,5 +66,13 @@ public class ProductEntity {
 
     public void setNameDescriptionTranslations(Set<NameDescriptionTranslationEntity> nameDescriptionTranslations) {
         this.nameDescriptionTranslations = nameDescriptionTranslations;
+    }
+
+    public Set<ProductCurrencyEntity> getProductCurrencies() {
+        return productCurrencies;
+    }
+
+    public void setProductCurrencies(Set<ProductCurrencyEntity> productCurrencies) {
+        this.productCurrencies = productCurrencies;
     }
 }

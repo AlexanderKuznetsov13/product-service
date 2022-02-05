@@ -15,7 +15,7 @@ public class LanguageEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "languageNameDescriptionTranslationEntity")
+    @OneToMany(mappedBy = "languageNameDescriptionTranslation")
     private Set<NameDescriptionTranslationEntity> nameDescriptionTranslations;
 
     public LanguageEntity(){
