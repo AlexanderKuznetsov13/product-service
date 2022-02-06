@@ -16,7 +16,7 @@ import java.util.List;
 
 @Tag(name = "Управление ценами для продукта")
 @RestController
-@RequestMapping("/productproductProductCurrency")
+@RequestMapping("/productcurrency")
 public class ProductCurrencyController {
 
     private final Logger logger = LoggerFactory.getLogger(ProductCurrencyController.class);

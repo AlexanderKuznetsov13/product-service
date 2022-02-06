@@ -86,6 +86,47 @@ public class CommonMapper {
         return responseDto;
     }
 
+    public static UserTypeEntity fromUserTypeRequestDtoToUserTypeEntity(UserTypeRequestDto requestDto) {
+        UserTypeEntity usersType = new UserTypeEntity();
+        usersType.setId(requestDto.getId());
+        usersType.setName(requestDto.getName());
+        usersType.setDescription(requestDto.getDescription());
+        return usersType;
+    }
+
+    public static UserTypeResponseDto fromUserTypeEntityToUserTypeResponseDto(UserTypeEntity userType) {
+        UserTypeResponseDto responseDto = new UserTypeResponseDto();
+        responseDto.setId(userType.getId());
+        responseDto.setName(userType.getName());
+        responseDto.setDescription(userType.getDescription());
+
+        return responseDto;
+    }
+
+    public static UserEntity fromUsersRequestDtoToUsersEntity(UserRequestDto requestDto) {
+        UserEntity user = new UserEntity();
+        user.setId(requestDto.getId());
+        user.setName(requestDto.getName());
+        user.setSurname(requestDto.getSurname());
+        user.setMiddlename(requestDto.getMiddlename());
+        user.setLogin(requestDto.getNickname());
+        user.setPassword(requestDto.getPassword());
+        return user;
+    }
+
+    public static UserResponseDto fromUserEntityToUserResponseDto(UserEntity userType) {
+        UserResponseDto responseDto = new UserResponseDto();
+        responseDto.setId(userType.getId());
+        responseDto.setName(userType.getName());
+        responseDto.setSurname(userType.getSurname());
+        responseDto.setMiddlename(userType.getMiddlename());
+        responseDto.setNickname(userType.getLogin());
+        responseDto.setPassword(userType.getPassword());
+        responseDto.setUserTypeId(userType.getUserTypeUser().getId());
+        return responseDto;
+
+    }
+
 
 
     

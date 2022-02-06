@@ -20,12 +20,12 @@ public class ProductCurrencyEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currency_id", nullable = false)
-    private LanguageEntity currencyProductCurrency;
+    private CurrencyEntity currencyProductCurrency;
 
     public ProductCurrencyEntity(){
     }
 
-    public ProductCurrencyEntity(Integer id, Float price, ProductEntity productProductCurrency, LanguageEntity currencyProductCurrency) {
+    public ProductCurrencyEntity(Integer id, Float price, ProductEntity productProductCurrency, CurrencyEntity currencyProductCurrency) {
         this.id = id;
         this.price = price;
         this.productProductCurrency = productProductCurrency;
@@ -56,11 +56,11 @@ public class ProductCurrencyEntity {
         this.productProductCurrency = productProductCurrency;
     }
 
-    public LanguageEntity getCurrencyProductCurrency() {
+    public CurrencyEntity getCurrencyProductCurrency() {
         return currencyProductCurrency;
     }
 
-    public void setCurrencyProductCurrency(LanguageEntity currencyProductCurrency) {
+    public void setCurrencyProductCurrency(CurrencyEntity currencyProductCurrency) {
         this.currencyProductCurrency = currencyProductCurrency;
     }
 }
