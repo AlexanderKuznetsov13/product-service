@@ -5,11 +5,9 @@ import ru.alex.kuznetsov.project.product.dto.NameDescriptionTranslationResponseD
 import ru.alex.kuznetsov.project.product.dto.ProductCurrencyResponseDto;
 import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
 import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
-import ru.alex.kuznetsov.project.product.entity.*;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
 import ru.alex.kuznetsov.project.product.repository.ProductRepository;
 import ru.alex.kuznetsov.project.product.service.*;
-import ru.alex.kuznetsov.project.product.util.CommonMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +65,6 @@ public class ProductClientResourceServiceImpl implements IProductClientResourceS
                     languageId, currencyId));
 
         for (int i = 0; i < list.size(); i++) {
-            ProductResponseDto entity = list.get(i);
             ProductFullDetailsResponseDto element = getProductById(list.get(i).getId(),  languageId, currencyId);
             result.add(element);
         }
