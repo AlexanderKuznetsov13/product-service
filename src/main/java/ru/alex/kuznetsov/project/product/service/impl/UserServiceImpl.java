@@ -67,7 +67,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     public UserEntity findByLogin(String login) {
-        return userRepository.findUsersEntitiesByLogin(login);
+        return userRepository.findByLogin(login);
     }
 
     public UserEntity findByLoginAndPassword(String login, String password) {

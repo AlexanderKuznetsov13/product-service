@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "name_description_translation")
+@Table(name = "name_description_translation", schema = "product")
 public class NameDescriptionTranslationEntity {
 
     @Id

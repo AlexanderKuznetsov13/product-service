@@ -11,6 +11,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
      * @param login user login
      * @return user
      */
-    UserEntity findUsersEntitiesByLogin(String login);
+    UserEntity findByLogin(String login);
 
 }

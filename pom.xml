@@ -22,7 +22,7 @@
     <properties>
         <java.version>8</java.version>
         <swagger.version>2.1.6</swagger.version>
-        <springdoc.version>1.5.9</springdoc.version>
+        <springdoc.version>1.6.6</springdoc.version>
         <postgresql.version>42.2.24</postgresql.version>
         <liquibase.version>4.6.2</liquibase.version>
     </properties>
@@ -67,6 +67,12 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
 

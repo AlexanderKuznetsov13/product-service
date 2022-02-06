@@ -36,7 +36,7 @@
                  name             VARCHAR(100)    NOT NULL,
                  surname             VARCHAR(100)    NOT NULL,
                  middlename             VARCHAR(100)    NOT NULL,
-                 nickname             VARCHAR(100)    NOT NULL,
+                 login             VARCHAR(100)    NOT NULL,
                  email             VARCHAR(100)    NOT NULL,
                  password             VARCHAR(100)    NOT NULL,
                  user_type_id             INTEGER    NOT NULL,
@@ -49,7 +49,7 @@
             COMMENT ON COLUMN product.user.name IS 'name of user';
             COMMENT ON COLUMN product.user.surname IS 'surname of user';
             COMMENT ON COLUMN product.user.middlename IS 'middlename of user';
-            COMMENT ON COLUMN product.user.nickname IS 'nickname user';
+            COMMENT ON COLUMN product.user.login IS 'nickname user';
             COMMENT ON COLUMN product.user.email IS 'email of user';
             COMMENT ON COLUMN product.user.password IS 'password of user';
             COMMENT ON COLUMN product.user.user_type_id IS 'ID of user type';

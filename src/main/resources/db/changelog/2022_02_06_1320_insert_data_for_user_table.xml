@@ -16,7 +16,7 @@
             </sqlCheck>
         </preConditions>
         <sql>
-            INSERT INTO product.user (id, name, surname, middlename, nickname, email, password, user_type_id)
+            INSERT INTO product.user (id, name, surname, middlename, login, email, password, user_type_id)
             VALUES (nextval('product.user_seq'), 'user1', 'user1 surname', 'user1 middlename', 'user1', 'user1@mail.ru', '$2a$10$XJVMrYZw4z1K7CjSKBNKjuluWNarRnJaZZF0EUrm0o/b2VfwcjoyS', 1 );
         </sql>
 

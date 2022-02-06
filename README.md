@@ -17,6 +17,10 @@
 
 [Условие](#task_condition)
 
+## Swagger
+http://localhost:8080/v3/api-docs
+http://localhost:8080/swagger-ui/index.html
+
 
 <a name="db_schema_table_list"></a>
 ## DB Schema

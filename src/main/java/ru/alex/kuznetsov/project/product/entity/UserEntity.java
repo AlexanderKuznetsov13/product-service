@@ -3,7 +3,7 @@ package ru.alex.kuznetsov.project.product.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name="user", schema = "product")
 public class UserEntity {
 
     @Id
@@ -45,8 +45,6 @@ public class UserEntity {
         this.password = password;
         this.userTypeUser = userTypeUser;
     }
-
-
 
     public Integer getId() {
         return id;
