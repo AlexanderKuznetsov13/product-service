@@ -3,6 +3,8 @@ package ru.alex.kuznetsov.project.product.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ru.alex.kuznetsov.project.product.dto.ProductCurrencyResponseDto;
+import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
 import ru.alex.kuznetsov.project.product.dto.ProductRequestDto;
 import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
 import ru.alex.kuznetsov.project.product.entity.ProductEntity;
@@ -59,6 +61,11 @@ public class ProductServiceImpl implements IProductService {
     public List<ProductResponseDto> getAll() {
         logger.error(String.format("getAll - retrieve all products"));
         return productRepository.findAll().stream().map(CommonMapper::fromProductEntityToProductResponseDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductResponseDto> getAllProductsByLanguageAndProductId(Integer currencyId, Integer languageId) {
+        return productRepository.getTranslationByLanguageAndProductId(currencyId, languageId).stream().map(CommonMapper::fromProductEntityToProductResponseDto).collect(Collectors.toList());
     }
 
 

@@ -11,6 +11,8 @@ import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
 import ru.alex.kuznetsov.project.product.service.IProductClientResourceService;
 
+import java.util.List;
+
 @Tag(name = "Пользовательский API")
 @RestController
 @RequestMapping("/productclientresource")
@@ -47,11 +49,12 @@ public class ProductClientResourceController {
 
     @Operation(summary = "Вывести весь список продуктов")
     @GetMapping(value = "/all")
-    public ResponseEntity<String> getAllProducts(
+    public ResponseEntity<List<ProductFullDetailsResponseDto>> getAllProducts(
             @Parameter(name="languageId",  required = true) @RequestParam(required = true) Integer languageId,
             @Parameter(name="currencyId", required = true) @RequestParam(required = true) Integer currencyId) {
-        logger.info(String.format("GET /all value = %s; language: %d; currency: %d", languageId, currencyId));
-        return ResponseEntity.ok().body("OK");
+        logger.info(String.format("GET /all products language: %d; currency: %d", languageId, currencyId));
+        List<ProductFullDetailsResponseDto> result = productClientResourceService.getAllProductsByLanguageAndCurrency(languageId, currencyId);
+        return ResponseEntity.ok().body(result);
     }
 
     @ExceptionHandler({NoEntityException.class})

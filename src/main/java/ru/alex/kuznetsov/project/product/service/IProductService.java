@@ -2,6 +2,8 @@ package ru.alex.kuznetsov.project.product.service;
 
 
 
+import ru.alex.kuznetsov.project.product.dto.ProductCurrencyResponseDto;
+import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
 import ru.alex.kuznetsov.project.product.dto.ProductRequestDto;
 import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
 
@@ -41,5 +43,8 @@ public interface IProductService {
      * @return list product
      */
     List<ProductResponseDto> getAll();
+
+
+    List<ProductResponseDto> getAllProductsByLanguageAndProductId(Integer currencyId, Integer languageId);
 
 }
