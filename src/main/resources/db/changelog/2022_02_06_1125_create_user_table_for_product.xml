@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="2022_02_06_1125_create_sequence_user_seq" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="f">
+                select dbu_sequence_exists('user_seq', 'product')
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE product.user_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2022_02_06_1125_create_user_for_product" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user" schemaName="product"/>
+            </not>
+            <sequenceExists sequenceName="user_seq" schemaName="product"/>
+            <not>
+                <primaryKeyExists primaryKeyName="user_id_pk" tableName="user" schemaName="product"/>
+            </not>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="user_user_type_id_fk"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE product.user (
+                 id              INTEGER NOT NULL DEFAULT nextval('product.user_seq'),
+                 name             VARCHAR(100)    NOT NULL,
+                 surname             VARCHAR(100)    NOT NULL,
+                 middlename             VARCHAR(100)    NOT NULL,
+                 login             VARCHAR(100)    NOT NULL,
+                 email             VARCHAR(100)    NOT NULL,
+                 password             VARCHAR(100)    NOT NULL,
+                 user_type_id             INTEGER    NOT NULL,
+
+                 CONSTRAINT user_id_pk PRIMARY KEY (id),
+                 CONSTRAINT user_user_type_id_fk FOREIGN KEY (user_type_id) REFERENCES product.user_type (id)
+            );
+
+            COMMENT ON TABLE product.user IS 'List of user.';
+            COMMENT ON COLUMN product.user.name IS 'name of user';
+            COMMENT ON COLUMN product.user.surname IS 'surname of user';
+            COMMENT ON COLUMN product.user.middlename IS 'middlename of user';
+            COMMENT ON COLUMN product.user.login IS 'nickname user';
+            COMMENT ON COLUMN product.user.email IS 'email of user';
+            COMMENT ON COLUMN product.user.password IS 'password of user';
+            COMMENT ON COLUMN product.user.user_type_id IS 'ID of user type';
+
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

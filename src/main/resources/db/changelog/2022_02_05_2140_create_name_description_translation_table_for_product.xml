@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="2022_02_05_2140_create_sequence_name_description_translation_seq" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="f">
+                select dbu_sequence_exists('name_description_translation_seq', 'product')
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE product.name_description_translation_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2022_02_05_2140_create_table_name_description_translation_for_product" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="name_description_translation" schemaName="product"/>
+            </not>
+            <sequenceExists sequenceName="name_description_translation_seq" schemaName="product"/>
+            <not>
+                <primaryKeyExists primaryKeyName="name_description_translation_id_pk" tableName="name_description_translation" schemaName="product"/>
+            </not>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="name_description_translation_product_id_fk"/>
+            </not>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="name_description_translation_language_id_fk"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE product.name_description_translation (
+                 id              INTEGER NOT NULL DEFAULT nextval('product.name_description_translation_seq'),
+                 name             VARCHAR(100)    NOT NULL,
+                 product_id             INTEGER    NOT NULL,
+                 language_id             INTEGER    NOT NULL,
+                 description             VARCHAR(1000)    NOT NULL,
+
+                 CONSTRAINT name_description_translation_id_pk PRIMARY KEY (id),
+                 CONSTRAINT name_description_translation_product_id_fk FOREIGN KEY (product_id) REFERENCES product.product (id),
+                 CONSTRAINT name_description_translation_language_id_fk FOREIGN KEY (language_id) REFERENCES product.language (id)
+            );
+
+            COMMENT ON TABLE product.name_description_translation IS 'List of translations for product name/description.';
+            COMMENT ON COLUMN product.name_description_translation.name IS 'name of product';
+            COMMENT ON COLUMN product.name_description_translation.product_id IS 'ID of product';
+            COMMENT ON COLUMN product.name_description_translation.language_id IS 'ID of language';
+            COMMENT ON COLUMN product.name_description_translation.description IS 'Description of product';
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

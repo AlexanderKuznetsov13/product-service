@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="2022_02_05_2120_create_sequence_product_seq" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="f">
+                select dbu_sequence_exists('product_seq', 'product')
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE product.product_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2022_02_05_2120_create_table_product_for_product" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product" schemaName="product"/>
+            </not>
+            <sequenceExists sequenceName="product_seq" schemaName="product"/>
+            <not>
+                <primaryKeyExists primaryKeyName="product_id_pk" tableName="product" schemaName="product"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE product.product (
+                 id              INTEGER NOT NULL DEFAULT nextval('product.product_seq'),
+                 creation_date TIMESTAMP NOT NULL,
+                 last_modification_date TIMESTAMP NOT NULL,
+
+                 CONSTRAINT product_id_pk PRIMARY KEY (id)
+            );
+
+            COMMENT ON TABLE product.product IS 'List of products';
+            COMMENT ON COLUMN product.product.creation_date IS 'date of creation';
+            COMMENT ON COLUMN product.product.last_modification_date IS 'date of modification';
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

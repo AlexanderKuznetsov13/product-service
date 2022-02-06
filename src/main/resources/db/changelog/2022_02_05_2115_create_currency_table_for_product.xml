@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="2022_02_05_2115_create_sequence_currency_seq" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="f">
+                select dbu_sequence_exists('currency_seq', 'product')
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE product.currency_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2022_02_05_2115_create_table_currency_for_product" author="alex.kuznetsov" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="currency" schemaName="product"/>
+            </not>
+            <sequenceExists sequenceName="currency_seq" schemaName="product"/>
+            <not>
+                <primaryKeyExists primaryKeyName="currency_id_pk" tableName="currency" schemaName="product"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE product.currency (
+                 id              INTEGER NOT NULL DEFAULT nextval('product.currency_seq'),
+                 name             VARCHAR(100)    NOT NULL,
+
+                 CONSTRAINT currency_id_pk PRIMARY KEY (id)
+            );
+
+            COMMENT ON TABLE product.currency IS 'List of currencies';
+            COMMENT ON COLUMN product.currency.id IS 'ID';
+            COMMENT ON COLUMN product.currency.name IS 'Name of currency';
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

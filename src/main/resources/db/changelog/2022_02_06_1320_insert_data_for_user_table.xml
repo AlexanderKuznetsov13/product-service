@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="2022_02_06_1320_insert_data_for_user_table" author="alex.kuznetsov"  dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="product" tableName="user"/>
+            <sqlCheck expectedResult="0">
+                select count(1)
+                from product.user
+                where name = 'user1'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            INSERT INTO product.user (id, name, surname, middlename, login, email, password, user_type_id)
+            VALUES (nextval('product.user_seq'), 'user1', 'user1 surname', 'user1 middlename', 'user1', 'user1@mail.ru', '$2a$10$XJVMrYZw4z1K7CjSKBNKjuluWNarRnJaZZF0EUrm0o/b2VfwcjoyS', 1 );
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,20 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <include file="changelog/1_add_functions.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_05_2055_create_product_schema.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_05_2100_create_language_table_for_product.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_05_2115_create_currency_table_for_product.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_05_2120_create_product_table_for_product.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_05_2130_create_product_currency_table_for_product.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_05_2140_create_name_description_translation_table_for_product.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_06_1100_create_users_type_table_for_product.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_06_1125_create_user_table_for_product.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_06_1300_insert_data_for_language_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_06_1310_insert_data_for_currency_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_06_1315_insert_data_for_user_type_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_06_1320_insert_data_for_user_table.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
