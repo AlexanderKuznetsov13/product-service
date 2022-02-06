@@ -105,11 +105,11 @@ public class CommonMapper {
 
     public static UserEntity fromUsersRequestDtoToUsersEntity(UserRequestDto requestDto) {
         UserEntity user = new UserEntity();
-        user.setId(requestDto.getId());
         user.setName(requestDto.getName());
         user.setSurname(requestDto.getSurname());
         user.setMiddlename(requestDto.getMiddlename());
         user.setLogin(requestDto.getNickname());
+        user.setEmail(requestDto.getEmail());
         user.setPassword(requestDto.getPassword());
         return user;
     }

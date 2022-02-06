@@ -22,4 +22,22 @@
 
     </changeSet>
 
+    <changeSet id="2022_02_06_1320_insert_data_for_user2_table" author="alex.kuznetsov"  dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="product" tableName="user"/>
+            <sqlCheck expectedResult="0">
+                select count(1)
+                from product.user
+                where name = 'user2'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            INSERT INTO product.user (id, name, surname, middlename, login, email, password, user_type_id)
+            VALUES (nextval('product.user_seq'), 'user2', 'user2 surname', 'user2 middlename', 'user2', 'user2@mail.ru', '$2a$10$fx/4DI0D0r6IVdpWMA5gSOKB2GRlg28s6XaDdmKJ8wwA12.N.sv2e', 2 );
+        </sql>
+
+    </changeSet>
+
+
+
 </databaseChangeLog>
