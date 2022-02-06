@@ -61,7 +61,11 @@ public class ProductCurrencyServiceImpl implements IProductCurrencyService {
         return productCurrencyRepository.findAll().stream().map(CommonMapper::fromProductCurrencyEntityToProductCurrencyResponseDto).collect(Collectors.toList());
     }
 
+    @Override
+    public List<ProductCurrencyResponseDto> getPriceByCurrencyAndProduct(Integer productId, Integer currencyId) {
+        return productCurrencyRepository.getPriceByCurrencyAndProduct(productId, currencyId).stream().map(CommonMapper::fromProductCurrencyEntityToProductCurrencyResponseDto).collect(Collectors.toList());
 
+    }
 
 
 }

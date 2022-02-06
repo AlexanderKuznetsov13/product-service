@@ -23,6 +23,8 @@ public class ProductFullDetailsResponseDto extends ProductRequestDto {
     @Schema(description = "Язык")
     private String languageName;
 
+    public ProductFullDetailsResponseDto() {
+    }
 
     public ProductFullDetailsResponseDto(String name, String description, Float price, String currencyName, String languageName) {
         this.name = name;

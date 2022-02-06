@@ -8,11 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
-import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
 import ru.alex.kuznetsov.project.product.service.IProductClientResourceService;
-
-import java.io.IOException;
 
 @Tag(name = "Пользовательский API")
 @RestController
@@ -23,6 +20,10 @@ public class ProductClientResourceController {
 
     private final IProductClientResourceService productClientResourceService;
 
+    public ProductClientResourceController(IProductClientResourceService productClientResourceService) {
+        this.productClientResourceService = productClientResourceService;
+    }
+
     @Operation(summary = "Получить продукт")
     @GetMapping(value = "/{productId}")
     public ResponseEntity<ProductFullDetailsResponseDto> getProductById(
@@ -30,7 +31,7 @@ public class ProductClientResourceController {
             @Parameter(name="currencyId", required = true) @RequestParam(required = false) Integer currencyId,
             @Parameter(name="productId", required = true) @PathVariable Integer productId) {
         logger.info(String.format("GET /getProductById id = %d; language: %d; currency: %d", productId, languageId, currencyId));
-        ProductFullDetailsResponseDto result = productClientResourceService.getProductById(productId, languageId, currencyId)
+        ProductFullDetailsResponseDto result = productClientResourceService.getProductById(productId, languageId, currencyId);
         return ResponseEntity.ok().body(result);
     }
 
@@ -54,8 +55,9 @@ public class ProductClientResourceController {
     }
 
     @ExceptionHandler({NoEntityException.class})
-    public ResponseEntity handleIOException(IOException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity handleException(NoEntityException e) {
+        logger.warn(e.getMessage());
+        return ResponseEntity.notFound().build();
     }
 
 }

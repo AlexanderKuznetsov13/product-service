@@ -11,9 +11,6 @@ import ru.alex.kuznetsov.project.product.dto.UserTypeResponseDto;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
 import ru.alex.kuznetsov.project.product.service.IUserTypeService;
 
-
-import java.io.IOException;
-
 @Tag(name = "Тип пользователя")
 @RestController
 @RequestMapping("/usertype")
@@ -54,8 +51,9 @@ public class UserTypeController {
     }
 
     @ExceptionHandler({NoEntityException.class})
-    public ResponseEntity handleIOException(IOException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity handleException(NoEntityException e) {
+        logger.warn(e.getMessage());
+        return ResponseEntity.notFound().build();
     }
 }
 

@@ -11,7 +11,6 @@ import ru.alex.kuznetsov.project.product.dto.ProductCurrencyResponseDto;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
 import ru.alex.kuznetsov.project.product.service.IProductCurrencyService;
 
-import java.io.IOException;
 import java.util.List;
 
 @Tag(name = "Управление ценами для продукта")
@@ -70,7 +69,8 @@ public class ProductCurrencyController {
     }
 
     @ExceptionHandler({NoEntityException.class})
-    public ResponseEntity handleIOException(IOException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity handleException(NoEntityException e) {
+        logger.warn(e.getMessage());
+        return ResponseEntity.notFound().build();
     }
 }
