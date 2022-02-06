@@ -7,8 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
 import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
+import ru.alex.kuznetsov.project.product.service.IProductClientResourceService;
 
 import java.io.IOException;
 
@@ -19,14 +21,17 @@ public class ProductClientResourceController {
 
     private final Logger logger = LoggerFactory.getLogger(ProductClientResourceController.class);
 
+    private final IProductClientResourceService productClientResourceService;
+
     @Operation(summary = "Получить продукт")
     @GetMapping(value = "/{productId}")
-    public ResponseEntity<String> getProductById(
+    public ResponseEntity<ProductFullDetailsResponseDto> getProductById(
             @Parameter(name="languageId",  required = true) @RequestParam(required = false) Integer languageId,
             @Parameter(name="currencyId", required = true) @RequestParam(required = false) Integer currencyId,
             @Parameter(name="productId", required = true) @PathVariable Integer productId) {
         logger.info(String.format("GET /getProductById id = %d; language: %d; currency: %d", productId, languageId, currencyId));
-        return ResponseEntity.ok().body("OK");
+        ProductFullDetailsResponseDto result = productClientResourceService.getProductById(productId, languageId, currencyId)
+        return ResponseEntity.ok().body(result);
     }
 
     @Operation(summary = "Вывести список продуктов содержищие строку в имени или описании")

@@ -61,7 +61,10 @@ public class NameDescriptionTranslationServiceImpl implements INameDescriptionTr
         return nameDescriptionTranslationRepository.findAll().stream().map(CommonMapper::fromNameDescriptionTranslationEntityToNameDescriptionTranslationResponseDto).collect(Collectors.toList());
     }
 
-
+    @Override
+    public List<NameDescriptionTranslationResponseDto> getTranslationByLanguageAndProductId(int productId, int languageId) {
+        return nameDescriptionTranslationRepository.getTranslationByLanguageAndProductId(productId, languageId).stream().map(CommonMapper::fromNameDescriptionTranslationEntityToNameDescriptionTranslationResponseDto).collect(Collectors.toList());
+    }
 
 
 }
