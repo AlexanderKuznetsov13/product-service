@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 
+
 @Schema(description = "Продукт")
 public class ProductFullDetailsResponseDto extends ProductResponseDto {
 

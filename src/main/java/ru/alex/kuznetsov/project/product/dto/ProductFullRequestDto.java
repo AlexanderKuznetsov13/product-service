@@ -3,24 +3,34 @@ package ru.alex.kuznetsov.project.product.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Schema(description = "Продукт")
 public class ProductFullRequestDto extends ProductRequestDto{
 
     @Schema(description = "Название")
+    @NotBlank(message = "Необходимо указать название товара")
+    @Size(max = 100)
     private String name;
 
     @Schema(description = "Описание")
+    @NotBlank(message = "Необходимо указать описание товара")
+    @Size(max = 1000)
     private String description;
 
     @Schema(description = "ID языка")
+    @NotBlank
     private Integer languageId;
 
     @Schema(description = "ID валюты")
+    @NotBlank
     private Integer currencyId;
 
     @Schema(description = "Стоимость")
+    @NotBlank
     private Float price;
 
     public ProductFullRequestDto() {

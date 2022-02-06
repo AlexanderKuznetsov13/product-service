@@ -4,16 +4,21 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
 import ru.alex.kuznetsov.project.product.dto.ProductFullRequestDto;
 import ru.alex.kuznetsov.project.product.dto.ProductRequestDto;
 import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
 import ru.alex.kuznetsov.project.product.service.IProductService;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Tag(name = "Управление продуктами")
 @RestController
@@ -38,8 +43,8 @@ public class ProductController {
     }
 
     @Operation(summary = "Создать продукт cо всеми параметрами")
-    @PostMapping(value = "/create/full")
-    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody ProductFullRequestDto requestDto) {
+    @PostMapping(value = "/createfull")
+    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody @Valid ProductFullRequestDto requestDto) {
         logger.info("POST /product/create");
         logger.debug("ProductRequestDto {}", requestDto);
         ProductResponseDto responseDto = productService.createFull(requestDto);
@@ -83,5 +88,18 @@ public class ProductController {
     public ResponseEntity handleException(NoEntityException e) {
         logger.warn(e.getMessage());
         return ResponseEntity.notFound().build();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 }
