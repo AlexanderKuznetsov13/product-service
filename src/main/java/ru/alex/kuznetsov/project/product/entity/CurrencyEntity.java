@@ -15,7 +15,7 @@ public class CurrencyEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "currencyProductCurrencyEntity")
+    @OneToMany(mappedBy = "currencyProductCurrency")
     private Set<ProductCurrencyEntity> productCurrencies;
 
     public CurrencyEntity(){

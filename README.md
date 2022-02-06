@@ -33,11 +33,11 @@
 
 #### List of products
 
-| Name | Column      |     Type     | Nullable | Default | Example | Comments            |
-|------|-------------|:------------:|:--------:|---------|---------|--------------------|
-| product | id          |   INTEGER    |  false   |         |         | PRIMARY KEY         |
-| product | creation_date | TIMESTAMP |  false   |         |         | date of creation         |
-| product | last_modification_date| TIMESTAMP |  false   |         |         | last modification         |
+| Name    | Column                 |   Type    | Nullable | Default | Example | Comments          |
+|---------|------------------------|:---------:|:--------:|---------|---------|-------------------|
+| product | id                     |  INTEGER  |  false   |         |         | PRIMARY KEY       |
+| product | creation_date          | TIMESTAMP |  false   |         |         | date of creation  |
+| product | last_modification_date | TIMESTAMP |  false   |         |         | last modification |
 
 
 <a name="db_schema_table_currency"></a>
@@ -46,10 +46,10 @@
 
 #### List of currencies
 
-| Name  | Column      |     Type     | Nullable  | Default | Example | Comments      |
-|-------|-------------|:------------:|:---------:|---------|---------|---------------|
-| currency | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
-| currency | name        | VARCHAR(100) |   false   |         |         | Name of currency |
+| Name     | Column |     Type     | Nullable | Default | Example | Comments         |
+|----------|--------|:------------:|:--------:|---------|---------|------------------|
+| currency | id     |   INTEGER    |  false   |         |         | PRIMARY KEY      |
+| currency | name   | VARCHAR(100) |  false   |         |         | Name of currency |
 
 
 <a name="db_schema_table_product_currency"></a>
@@ -58,12 +58,12 @@
 
 #### List of products with different currencies
 
-| Name  | Column      |     Type     | Nullable  | Default | Example | Comments      |
-|-------|-------------|:------------:|:---------:|---------|---------|---------------|
-| product_currency | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
-| product_currency | product_id          |   INTEGER    |   false   |         |         | product id   |
-| product_currency | currency_id          |   INTEGER    |   false   |         |         | currency id   |
-| product_currency | price        | REAL |   false   |         |         | price |
+| Name             | Column      |  Type   | Nullable | Default | Example | Comments    |
+|------------------|-------------|:-------:|:--------:|---------|---------|-------------|
+| product_currency | id          | INTEGER |  false   |         |         | PRIMARY KEY |
+| product_currency | product_id  | INTEGER |  false   |         |         | product id  |
+| product_currency | currency_id | INTEGER |  false   |         |         | currency id |
+| product_currency | price       |  REAL   |  false   |         |         | price       |
 
 
 
@@ -73,10 +73,10 @@
 
 #### List of languages
 
-| Name  | Column      |     Type     | Nullable  | Default | Example | Comments      |
-|-------|-------------|:------------:|:---------:|---------|---------|---------------|
-| language | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
-| language | name        | VARCHAR(100) |   false   |         |         | Name of language |
+| Name     | Column |     Type     | Nullable | Default | Example | Comments         |
+|----------|--------|:------------:|:--------:|---------|---------|------------------|
+| language | id     |   INTEGER    |  false   |         |         | PRIMARY KEY      |
+| language | name   | VARCHAR(100) |  false   |         |         | Name of language |
 
 
 <a name="db_schema_table_name_description_translation"></a>
@@ -85,13 +85,13 @@
 
 #### List of translations for product name/description.
 
-| Name  | Column      |     Type     | Nullable  | Default | Example | Comments      |
-|-------|-------------|:------------:|:---------:|---------|---------|---------------|
-| name_description_translation | id          |   INTEGER    |   false   |         |         | PRIMARY KEY   |
-| name_description_translation | product_id          |   INTEGER    |   false   |         |         | product id   |
-| name_description_translation | language_id          |   INTEGER    |   false   |         |         | language id   |
-| name_description_translation | name        | VARCHAR(100) |   false   |         |         | name of product |
-| name_description_translation | description        | VARCHAR(1000) |   false   |         |         | description of product |
+| Name                         | Column      |     Type      | Nullable | Default | Example | Comments               |
+|------------------------------|-------------|:-------------:|:--------:|---------|---------|------------------------|
+| name_description_translation | id          |    INTEGER    |  false   |         |         | PRIMARY KEY            |
+| name_description_translation | product_id  |    INTEGER    |  false   |         |         | product id             |
+| name_description_translation | language_id |    INTEGER    |  false   |         |         | language id            |
+| name_description_translation | name        | VARCHAR(100)  |  false   |         |         | name of product        |
+| name_description_translation | description | VARCHAR(1000) |  false   |         |         | description of product |
 
 
 
