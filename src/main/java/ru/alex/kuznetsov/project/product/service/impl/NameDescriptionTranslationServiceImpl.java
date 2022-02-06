@@ -7,7 +7,9 @@ import ru.alex.kuznetsov.project.product.dto.NameDescriptionTranslationRequestDt
 import ru.alex.kuznetsov.project.product.dto.NameDescriptionTranslationResponseDto;
 import ru.alex.kuznetsov.project.product.entity.NameDescriptionTranslationEntity;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
+import ru.alex.kuznetsov.project.product.repository.LanguageRepository;
 import ru.alex.kuznetsov.project.product.repository.NameDescriptionTranslationRepository;
+import ru.alex.kuznetsov.project.product.repository.ProductRepository;
 import ru.alex.kuznetsov.project.product.service.INameDescriptionTranslationService;
 import ru.alex.kuznetsov.project.product.util.CommonMapper;
 
@@ -20,9 +22,13 @@ public class NameDescriptionTranslationServiceImpl implements INameDescriptionTr
     private final static Logger logger = LoggerFactory.getLogger(NameDescriptionTranslationServiceImpl.class);
 
     private final NameDescriptionTranslationRepository nameDescriptionTranslationRepository;
+    private final LanguageRepository languageRepository;
+    private final ProductRepository productRepository;
 
-    public NameDescriptionTranslationServiceImpl(NameDescriptionTranslationRepository nameDescriptionTranslationRepository) {
+    public NameDescriptionTranslationServiceImpl(NameDescriptionTranslationRepository nameDescriptionTranslationRepository, LanguageRepository languageRepository, ProductRepository productRepository) {
         this.nameDescriptionTranslationRepository = nameDescriptionTranslationRepository;
+        this.languageRepository = languageRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -36,12 +42,17 @@ public class NameDescriptionTranslationServiceImpl implements INameDescriptionTr
     public NameDescriptionTranslationResponseDto create(NameDescriptionTranslationRequestDto requestDto) {
         logger.error(String.format("create - create nameDescriptionTranslation"));
         NameDescriptionTranslationEntity nameDescriptionTranslation = CommonMapper.fromNameDescriptionTranslationRequestDtoToNameDescriptionTranslationEntity(requestDto);
+        nameDescriptionTranslation.setLanguageNameDescriptionTranslation(languageRepository.getById(requestDto.getLanguageId()));
+        nameDescriptionTranslation.setProductNameDescriptionTranslation(productRepository.getById(requestDto.getProductId()));
         return CommonMapper.fromNameDescriptionTranslationEntityToNameDescriptionTranslationResponseDto(nameDescriptionTranslationRepository.save(nameDescriptionTranslation));
     }
 
     @Override
     public NameDescriptionTranslationResponseDto update(NameDescriptionTranslationRequestDto requestDto) {
         NameDescriptionTranslationEntity nameDescriptionTranslation = CommonMapper.fromNameDescriptionTranslationRequestDtoToNameDescriptionTranslationEntity(requestDto);
+        nameDescriptionTranslation.setId(requestDto.getId());
+        nameDescriptionTranslation.setLanguageNameDescriptionTranslation(languageRepository.getById(requestDto.getLanguageId()));
+        nameDescriptionTranslation.setProductNameDescriptionTranslation(productRepository.getById(requestDto.getProductId()));
         logger.error(String.format("update - update nameDescriptionTranslation with %d", nameDescriptionTranslation.getId()));
         return CommonMapper.fromNameDescriptionTranslationEntityToNameDescriptionTranslationResponseDto(nameDescriptionTranslationRepository.save(nameDescriptionTranslation));
     }

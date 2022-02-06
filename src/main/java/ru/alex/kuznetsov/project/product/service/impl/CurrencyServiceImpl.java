@@ -42,6 +42,7 @@ public class CurrencyServiceImpl implements ICurrencyService {
     @Override
     public CurrencyResponseDto update(CurrencyRequestDto requestDto) {
         CurrencyEntity currency = CommonMapper.fromCurrencyRequestDtoToCurrencyEntity(requestDto);
+        currency.setId(requestDto.getId());
         logger.error(String.format("update - update currency with %d", currency.getId()));
         return CommonMapper.fromCurrencyEntityToCurrencyResponseDto(currencyRepository.save(currency));
     }

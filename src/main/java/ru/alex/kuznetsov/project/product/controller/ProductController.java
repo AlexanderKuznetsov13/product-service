@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
+import ru.alex.kuznetsov.project.product.dto.ProductFullRequestDto;
 import ru.alex.kuznetsov.project.product.dto.ProductRequestDto;
 import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
@@ -32,6 +34,15 @@ public class ProductController {
         logger.info("POST /product/create");
         logger.debug("ProductRequestDto {}", requestDto);
         ProductResponseDto responseDto = productService.create(requestDto);
+        return ResponseEntity.ok().body(responseDto);
+    }
+
+    @Operation(summary = "Создать продукт cо всеми параметрами")
+    @PostMapping(value = "/create/full")
+    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody ProductFullRequestDto requestDto) {
+        logger.info("POST /product/create");
+        logger.debug("ProductRequestDto {}", requestDto);
+        ProductResponseDto responseDto = productService.createFull(requestDto);
         return ResponseEntity.ok().body(responseDto);
     }
 

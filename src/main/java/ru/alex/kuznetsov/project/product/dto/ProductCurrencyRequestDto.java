@@ -22,11 +22,15 @@ public class ProductCurrencyRequestDto {
     public ProductCurrencyRequestDto() {
     }
 
-    public ProductCurrencyRequestDto(Integer id, Float price, int productId, int currencyId) {
-        this.id = id;
+    public ProductCurrencyRequestDto(Float price, int productId, int currencyId) {
         this.price = price;
         this.productId = productId;
         this.currencyId = currencyId;
+    }
+
+    public ProductCurrencyRequestDto(Integer id, Float price, int productId, int currencyId) {
+        this(price, productId, currencyId);
+        this.id = id;
     }
 
     public Integer getId() {

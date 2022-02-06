@@ -4,7 +4,7 @@ package ru.alex.kuznetsov.project.product.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "name_description_translation", schema = "product")
+@Table(name = "product_currency", schema = "product")
 public class ProductCurrencyEntity {
 
     @Id

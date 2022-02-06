@@ -42,6 +42,7 @@ public class LanguageServiceImpl implements ILanguageService {
     @Override
     public LanguageResponseDto update(LanguageRequestDto requestDto) {
         LanguageEntity language = CommonMapper.fromLanguageRequestDtoToLanguageEntity(requestDto);
+        language.setId(requestDto.getId());
         logger.error(String.format("update - update language with %d", language.getId()));
         return CommonMapper.fromLanguageEntityToLanguageResponseDto(languageRepository.save(language));
     }

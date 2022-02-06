@@ -8,9 +8,7 @@ public class CommonMapper {
 
     public static LanguageEntity fromLanguageRequestDtoToLanguageEntity(LanguageRequestDto requestDto) {
         LanguageEntity language = new LanguageEntity();
-        language.setId(requestDto.getId());
         language.setName(requestDto.getName());
-
         return language;
     }
 
@@ -23,9 +21,7 @@ public class CommonMapper {
 
     public static CurrencyEntity fromCurrencyRequestDtoToCurrencyEntity(CurrencyRequestDto requestDto) {
         CurrencyEntity currency = new CurrencyEntity();
-        currency.setId(requestDto.getId());
         currency.setName(requestDto.getName());
-
         return currency;
     }
 
@@ -38,7 +34,6 @@ public class CommonMapper {
 
     public static ProductEntity fromProductRequestDtoToProductEntity(ProductRequestDto requestDto) {
         ProductEntity product = new ProductEntity();
-        product.setId(requestDto.getId());
         product.setCreationDate(requestDto.getCreationDate());
         product.setLastModificationDate(requestDto.getLastModificationDate());
 
@@ -56,7 +51,6 @@ public class CommonMapper {
 
     public static NameDescriptionTranslationEntity fromNameDescriptionTranslationRequestDtoToNameDescriptionTranslationEntity(NameDescriptionTranslationRequestDto requestDto) {
         NameDescriptionTranslationEntity nameDescriptionTranslation = new NameDescriptionTranslationEntity();
-        nameDescriptionTranslation.setId(requestDto.getId());
         nameDescriptionTranslation.setName(requestDto.getName());
         nameDescriptionTranslation.setDescription(requestDto.getDescription());
 
@@ -73,7 +67,6 @@ public class CommonMapper {
 
     public static ProductCurrencyEntity fromProductCurrencyRequestDtoToProductCurrencyEntity(ProductCurrencyRequestDto requestDto) {
         ProductCurrencyEntity productCurrency = new ProductCurrencyEntity();
-        productCurrency.setId(requestDto.getId());
         productCurrency.setPrice(requestDto.getPrice());
 
         return productCurrency;

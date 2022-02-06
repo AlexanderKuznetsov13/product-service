@@ -25,12 +25,16 @@ public class NameDescriptionTranslationRequestDto {
     public NameDescriptionTranslationRequestDto() {
     }
 
-    public NameDescriptionTranslationRequestDto(Integer id, String name, String description, int productId, int languageId) {
-        this.id = id;
+    public NameDescriptionTranslationRequestDto(String name, String description, int productId, int languageId) {
         this.name = name;
         this.description = description;
         this.productId = productId;
         this.languageId = languageId;
+    }
+
+    public NameDescriptionTranslationRequestDto(Integer id, String name, String description, int productId, int languageId) {
+        this(name, description, productId, languageId);
+        this.id = id;
     }
 
     public Integer getId() {

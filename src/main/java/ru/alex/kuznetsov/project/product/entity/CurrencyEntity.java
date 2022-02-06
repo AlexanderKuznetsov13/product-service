@@ -21,9 +21,10 @@ public class CurrencyEntity {
     public CurrencyEntity(){
     }
 
-    public CurrencyEntity(Integer id, String name) {
+    public CurrencyEntity(Integer id, String name, Set<ProductCurrencyEntity> productCurrencies) {
         this.id = id;
         this.name = name;
+        this.productCurrencies = productCurrencies;
     }
 
     public Integer getId() {
@@ -40,5 +41,13 @@ public class CurrencyEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<ProductCurrencyEntity> getProductCurrencies() {
+        return productCurrencies;
+    }
+
+    public void setProductCurrencies(Set<ProductCurrencyEntity> productCurrencies) {
+        this.productCurrencies = productCurrencies;
     }
 }

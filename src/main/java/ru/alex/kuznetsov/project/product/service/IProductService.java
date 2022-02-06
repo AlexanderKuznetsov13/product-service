@@ -2,10 +2,7 @@ package ru.alex.kuznetsov.project.product.service;
 
 
 
-import ru.alex.kuznetsov.project.product.dto.ProductCurrencyResponseDto;
-import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
-import ru.alex.kuznetsov.project.product.dto.ProductRequestDto;
-import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
+import ru.alex.kuznetsov.project.product.dto.*;
 
 import java.util.List;
 
@@ -24,6 +21,8 @@ public interface IProductService {
      * @return new product
      */
     ProductResponseDto create(ProductRequestDto requestDto);
+
+    ProductResponseDto createFull(ProductFullRequestDto requestDto);
 
     /**
      * update old product
