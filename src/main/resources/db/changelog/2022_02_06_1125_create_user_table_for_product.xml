@@ -31,8 +31,8 @@
             </not>
         </preConditions>
         <sql>
-            CREATE TABLE product.name_description_translation (
-                 id              INTEGER NOT NULL DEFAULT nextval('product.name_user_seq'),
+            CREATE TABLE product.user (
+                 id              INTEGER NOT NULL DEFAULT nextval('product.user_seq'),
                  name             VARCHAR(100)    NOT NULL,
                  surname             VARCHAR(100)    NOT NULL,
                  middlename             VARCHAR(100)    NOT NULL,
@@ -41,18 +41,18 @@
                  password             VARCHAR(100)    NOT NULL,
                  user_type_id             INTEGER    NOT NULL,
 
-                 CONSTRAINT name_user_id_pk PRIMARY KEY (id),
+                 CONSTRAINT user_id_pk PRIMARY KEY (id),
                  CONSTRAINT user_user_type_id_fk FOREIGN KEY (user_type_id) REFERENCES product.user_type (id)
             );
 
-            COMMENT ON TABLE product.name_description_translation IS 'List of user.';
-            COMMENT ON COLUMN product.name_description_translation.name IS 'name of user';
-            COMMENT ON COLUMN product.name_description_translation.surname IS 'surname of user';
-            COMMENT ON COLUMN product.name_description_translation.middlename IS 'middlename of user';
-            COMMENT ON COLUMN product.name_description_translation.nickname IS 'nickname user';
-            COMMENT ON COLUMN product.name_description_translation.email IS 'email of user';
-            COMMENT ON COLUMN product.name_description_translation.password IS 'password of user';
-            COMMENT ON COLUMN product.name_description_translation.user_type_id IS 'ID of user type';
+            COMMENT ON TABLE product.user IS 'List of user.';
+            COMMENT ON COLUMN product.user.name IS 'name of user';
+            COMMENT ON COLUMN product.user.surname IS 'surname of user';
+            COMMENT ON COLUMN product.user.middlename IS 'middlename of user';
+            COMMENT ON COLUMN product.user.nickname IS 'nickname user';
+            COMMENT ON COLUMN product.user.email IS 'email of user';
+            COMMENT ON COLUMN product.user.password IS 'password of user';
+            COMMENT ON COLUMN product.user.user_type_id IS 'ID of user type';
 
         </sql>
     </changeSet>
