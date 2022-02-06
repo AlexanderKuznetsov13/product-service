@@ -42,4 +42,6 @@ public interface IProductCurrencyService {
      */
     List<ProductCurrencyResponseDto> getAll();
 
+    List<ProductCurrencyResponseDto> getPriceByCurrencyAndProduct(Integer productId, Integer currencyId);
+
 }

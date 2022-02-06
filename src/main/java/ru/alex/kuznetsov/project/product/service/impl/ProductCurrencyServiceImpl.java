@@ -7,7 +7,9 @@ import ru.alex.kuznetsov.project.product.dto.ProductCurrencyRequestDto;
 import ru.alex.kuznetsov.project.product.dto.ProductCurrencyResponseDto;
 import ru.alex.kuznetsov.project.product.entity.ProductCurrencyEntity;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
+import ru.alex.kuznetsov.project.product.repository.CurrencyRepository;
 import ru.alex.kuznetsov.project.product.repository.ProductCurrencyRepository;
+import ru.alex.kuznetsov.project.product.repository.ProductRepository;
 import ru.alex.kuznetsov.project.product.service.IProductCurrencyService;
 import ru.alex.kuznetsov.project.product.util.CommonMapper;
 
@@ -20,14 +22,18 @@ public class ProductCurrencyServiceImpl implements IProductCurrencyService {
     private final static Logger logger = LoggerFactory.getLogger(ProductCurrencyServiceImpl.class);
 
     private final ProductCurrencyRepository productCurrencyRepository;
+    private final CurrencyRepository currencyRepository;
+    private final ProductRepository productRepository;
 
-    public ProductCurrencyServiceImpl(ProductCurrencyRepository productCurrencyRepository) {
+    public ProductCurrencyServiceImpl(ProductCurrencyRepository productCurrencyRepository, CurrencyRepository currencyRepository, ProductRepository productRepository) {
         this.productCurrencyRepository = productCurrencyRepository;
+        this.currencyRepository = currencyRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
     public ProductCurrencyResponseDto getById(Integer id) {
-        logger.error(String.format("getById - get productCurrency with %id", id));
+        logger.error(String.format("getById - get productCurrency with %d", id));
         productCurrencyRepository.findById(id).orElseThrow(() -> new NoEntityException(String.format("ProductCurrency with ID = %d not found", id)));
         return CommonMapper.fromProductCurrencyEntityToProductCurrencyResponseDto(productCurrencyRepository.getById(id));
     }
@@ -36,13 +42,18 @@ public class ProductCurrencyServiceImpl implements IProductCurrencyService {
     public ProductCurrencyResponseDto create(ProductCurrencyRequestDto requestDto) {
         logger.error(String.format("create - create productCurrency"));
         ProductCurrencyEntity productCurrency = CommonMapper.fromProductCurrencyRequestDtoToProductCurrencyEntity(requestDto);
+        productCurrency.setCurrencyProductCurrency(currencyRepository.getById(requestDto.getCurrencyId()));
+        productCurrency.setProductProductCurrency(productRepository.getById(requestDto.getProductId()));
         return CommonMapper.fromProductCurrencyEntityToProductCurrencyResponseDto(productCurrencyRepository.save(productCurrency));
     }
 
     @Override
     public ProductCurrencyResponseDto update(ProductCurrencyRequestDto requestDto) {
         ProductCurrencyEntity productCurrency = CommonMapper.fromProductCurrencyRequestDtoToProductCurrencyEntity(requestDto);
-        logger.error(String.format("update - update productCurrency with %id", productCurrency.getId()));
+        productCurrency.setId(requestDto.getId());
+        productCurrency.setCurrencyProductCurrency(currencyRepository.getById(requestDto.getCurrencyId()));
+        productCurrency.setProductProductCurrency(productRepository.getById(requestDto.getProductId()));
+        logger.error(String.format("update - update productCurrency with %d", productCurrency.getId()));
         return CommonMapper.fromProductCurrencyEntityToProductCurrencyResponseDto(productCurrencyRepository.save(productCurrency));
     }
 
@@ -59,6 +70,12 @@ public class ProductCurrencyServiceImpl implements IProductCurrencyService {
     public List<ProductCurrencyResponseDto> getAll() {
         logger.error(String.format("getAll - retrieve all productCurrencys"));
         return productCurrencyRepository.findAll().stream().map(CommonMapper::fromProductCurrencyEntityToProductCurrencyResponseDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductCurrencyResponseDto> getPriceByCurrencyAndProduct(Integer productId, Integer currencyId) {
+        return productCurrencyRepository.getPriceByCurrencyAndProduct(productId, currencyId).stream().map(CommonMapper::fromProductCurrencyEntityToProductCurrencyResponseDto).collect(Collectors.toList());
+
     }
 
 

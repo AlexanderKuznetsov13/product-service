@@ -22,14 +22,6 @@ public class AuthController {
     @Autowired
     private JwtProvider jwtProvider;
 
-//    @PostMapping("/register")
-//    public String registerUser(@RequestBody @Valid RegistrationRequest registrationRequest) {
-//        UserEntity u = new UserEntity();
-//        u.setPassword(registrationRequest.getPassword());
-//        u.setLogin(registrationRequest.getLogin());
-//        userService.saveUser(u);
-//        return "OK";
-//    }
 
     @PostMapping()
     public AuthResponseDto auth(@RequestBody AuthRequestDto request) {

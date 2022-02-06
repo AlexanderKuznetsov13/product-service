@@ -2,8 +2,7 @@ package ru.alex.kuznetsov.project.product.service;
 
 
 
-import ru.alex.kuznetsov.project.product.dto.ProductRequestDto;
-import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
+import ru.alex.kuznetsov.project.product.dto.*;
 
 import java.util.List;
 
@@ -23,6 +22,8 @@ public interface IProductService {
      */
     ProductResponseDto create(ProductRequestDto requestDto);
 
+    ProductResponseDto createFull(ProductFullRequestDto requestDto);
+
     /**
      * update old product
      * @param requestDto new product
@@ -41,5 +42,10 @@ public interface IProductService {
      * @return list product
      */
     List<ProductResponseDto> getAll();
+
+
+    List<ProductResponseDto> getAllProductsByNameOrDescription(String word, Integer currencyId, Integer languageId);
+
+    List<ProductResponseDto> getAllProductsByLanguageAndProductId(Integer currencyId, Integer languageId);
 
 }

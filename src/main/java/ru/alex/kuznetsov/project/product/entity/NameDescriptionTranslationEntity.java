@@ -4,6 +4,7 @@ package ru.alex.kuznetsov.project.product.entity;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "name_description_translation", schema = "product")

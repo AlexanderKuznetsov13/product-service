@@ -27,7 +27,7 @@ public class CurrencyServiceImpl implements ICurrencyService {
 
     @Override
     public CurrencyResponseDto getById(Integer id) {
-        logger.error(String.format("getById - get currency with %id", id));
+        logger.error(String.format("getById - get currency with %d", id));
         currencyRepository.findById(id).orElseThrow(() -> new NoEntityException(String.format("Currency with ID = %d not found", id)));
         return CommonMapper.fromCurrencyEntityToCurrencyResponseDto(currencyRepository.getById(id));
     }
@@ -42,7 +42,8 @@ public class CurrencyServiceImpl implements ICurrencyService {
     @Override
     public CurrencyResponseDto update(CurrencyRequestDto requestDto) {
         CurrencyEntity currency = CommonMapper.fromCurrencyRequestDtoToCurrencyEntity(requestDto);
-        logger.error(String.format("update - update currency with %id", currency.getId()));
+        currency.setId(requestDto.getId());
+        logger.error(String.format("update - update currency with %d", currency.getId()));
         return CommonMapper.fromCurrencyEntityToCurrencyResponseDto(currencyRepository.save(currency));
     }
 
@@ -57,7 +58,7 @@ public class CurrencyServiceImpl implements ICurrencyService {
 
     @Override
     public List<CurrencyResponseDto> getAll() {
-        logger.error(String.format("getAll - retrieve all currencys"));
+        logger.error(String.format("getAll - retrieve all currencies"));
         return currencyRepository.findAll().stream().map(CommonMapper::fromCurrencyEntityToCurrencyResponseDto).collect(Collectors.toList());
     }
 

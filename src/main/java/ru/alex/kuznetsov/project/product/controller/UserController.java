@@ -12,8 +12,6 @@ import ru.alex.kuznetsov.project.product.dto.UserResponseDto;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
 import ru.alex.kuznetsov.project.product.service.IUserService;
 
-import java.io.IOException;
-
 @Tag(name = "Пользователь")
 @RestController
 @RequestMapping("/user")
@@ -54,8 +52,9 @@ public class UserController {
     }
 
     @ExceptionHandler({NoEntityException.class})
-    public ResponseEntity handleIOException(IOException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity handleException(NoEntityException e) {
+        logger.warn(e.getMessage());
+        return ResponseEntity.notFound().build();
     }
 
 }

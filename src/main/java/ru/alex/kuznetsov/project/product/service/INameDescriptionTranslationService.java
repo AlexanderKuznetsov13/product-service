@@ -2,6 +2,8 @@ package ru.alex.kuznetsov.project.product.service;
 
 
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import ru.alex.kuznetsov.project.product.dto.NameDescriptionTranslationRequestDto;
 import ru.alex.kuznetsov.project.product.dto.NameDescriptionTranslationResponseDto;
 
@@ -41,5 +43,8 @@ public interface INameDescriptionTranslationService {
      * @return list nameDescriptionTranslation
      */
     List<NameDescriptionTranslationResponseDto> getAll();
+
+
+    List<NameDescriptionTranslationResponseDto> getTranslationByLanguageAndProductId(int productId, int languageId);
 
 }

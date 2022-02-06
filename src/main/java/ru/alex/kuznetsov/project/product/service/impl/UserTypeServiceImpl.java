@@ -30,7 +30,7 @@ public class UserTypeServiceImpl implements IUserTypeService {
 
     @Override
     public UserTypeResponseDto getById(Integer id) {
-        logger.debug(String.format("getById - get userType with %id", id));
+        logger.debug(String.format("getById - get userType with %d", id));
         userTypeRepository.findById(id).orElseThrow(() -> new NoEntityException(String.format("UserType with ID = %d not found", id)));
         return CommonMapper.fromUserTypeEntityToUserTypeResponseDto(userTypeRepository.getById(id));
     }
@@ -45,7 +45,7 @@ public class UserTypeServiceImpl implements IUserTypeService {
     @Override
     public UserTypeResponseDto update(UserTypeRequestDto requestDto) {
         UserTypeEntity userType = CommonMapper.fromUserTypeRequestDtoToUserTypeEntity(requestDto);
-        logger.debug(String.format("update - update userType with %id", userType.getId()));
+        logger.debug(String.format("update - update userType with %d", userType.getId()));
         return CommonMapper.fromUserTypeEntityToUserTypeResponseDto(userTypeRepository.save(userType));
     }
 

@@ -1,21 +1,45 @@
 # **Product Service**
 
-- [ ] put tables into README.md
-- [ ] UML diagram of database
-    - [ ] draw UML diagram
-    - [ ] check all fields and refactor
-- [ ] liquibase scripts for tables
-    - [ ] product 
-    - [ ] currency 
-    - [ ] product_currency 
-    - [ ] language 
-    - [ ] name_description_translation 
-- [ ] add rest controller
-- [ ] \(Optional) define test sql queries
-- [ ] \(Optional) define prod sql queries
-- [ ] \(Optional) check and refactor README.md and UML diagram
+- [x] put tables into README.md
+- [x] UML diagram of database
+    - [x] draw UML diagram
+    - [x] check all fields and refactor
+- [x] liquibase scripts for tables
+    - [x] product 
+    - [x] currency 
+    - [x] product_currency 
+    - [x] language 
+    - [x] name_description_translation 
+    - [x] user 
+    - [x] user_type 
+- [x] add rest controller
+- [x] add user endpoint with required methods
+- [x] ExceptionHandler
+- [x] add Security with roles (JWT token)
+- [x] \(Optional) define test sql queries
+- [x] \(Optional) check and refactor README.md and UML diagram
 
 [Условие](#task_condition)
+
+## Инструкция
+ - Создать БД (product) через pgadmin 
+ - собрать maven проект и запустить приложение (liquibase скрипты отработают автоматически)
+ - Использовать Postman или Swagger UI (http://localhost:8080/swagger-ui/index.html)
+ - авторизоваться как user1/user1 через endpoint /auth
+    login: user1
+    password: user1
+    role: ADMIN
+
+   login: user2
+   password: user2
+   role: USER
+
+ADMIN имеет доступ до всех endpoint'ов,
+USER только до пользовательского интерфейса (/productclientresource)
+
+ - полученный токен использовать как Bearer token для всех последующих запросов
+ 
+
 
 ## Swagger
 http://localhost:8080/v3/api-docs
@@ -29,6 +53,8 @@ http://localhost:8080/swagger-ui/index.html
 * [product_currency](#db_schema_table_product_currency)
 * [language](#db_schema_table_language)
 * [name_description_translation](#db_schema_table_name_description_translation)
+* [user_type](#db_schema_table_user_type)
+* [user](#db_schema_table_user)
 
 
 <a name="db_schema_table_product"></a>
@@ -97,6 +123,36 @@ http://localhost:8080/swagger-ui/index.html
 | name_description_translation | name        | VARCHAR(100)  |  false   |         |         | name of product        |
 | name_description_translation | description | VARCHAR(1000) |  false   |         |         | description of product |
 
+
+<a name="db_schema_table_user_type"></a>
+### user_type
+[Back to table list](#db_schema_table_list)
+
+#### List of user types
+
+| Name      | Column      |     Type      | Nullable | Default | Example | Comments                 |
+|-----------|-------------|:-------------:|:--------:|---------|---------|--------------------------|
+| user_type | id          |    INTEGER    |  false   |         |         | PRIMARY KEY              |
+| user_type | name        | VARCHAR(100)  |  false   |         |         | Name of user type        |
+| user_type | description | VARCHAR(1000) |  false   |         |         | Description of user type |
+
+
+<a name="db_schema_table_user"></a>
+### user
+[Back to table list](#db_schema_table_list)
+
+#### List of users
+
+| Name | Column       |     Type     | Nullable | Default | Example | Comments           |
+|------|--------------|:------------:|:--------:|---------|---------|--------------------|
+| user | id           |   INTEGER    |  false   |         |         | PRIMARY KEY        |
+| user | name         | VARCHAR(100) |  false   |         |         | Name of user       |
+| user | surname      | VARCHAR(100) |  false   |         |         | Surname of user    |
+| user | middlename   | VARCHAR(100) |  false   |         |         | Middlename of user |
+| user | login        | VARCHAR(100) |  false   |         |         | Login of user      |
+| user | email        | VARCHAR(100) |  false   |         |         | Email of user      |
+| user | password     | VARCHAR(100) |  false   |         |         | Password of user   |
+| user | user_type_id |   INTEGER    |  false   |         |         | user type of user  |
 
 
 
