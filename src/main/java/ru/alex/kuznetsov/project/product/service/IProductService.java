@@ -45,6 +45,8 @@ public interface IProductService {
     List<ProductResponseDto> getAll();
 
 
+    List<ProductResponseDto> getAllProductsByNameOrDescription(String word, Integer currencyId, Integer languageId);
+
     List<ProductResponseDto> getAllProductsByLanguageAndProductId(Integer currencyId, Integer languageId);
 
 }

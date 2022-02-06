@@ -18,5 +18,15 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
             " where pc.currency_id = :currencyId and ndt.language_id = :languageId", nativeQuery = true)
     List<ProductEntity> getTranslationByLanguageAndProductId(@Param("currencyId") Integer currencyId, @Param("languageId") Integer languageId );
 
+    @Query(value = "SELECT * FROM product.product p" +
+            " inner join product.product_currency pc on p.id = pc.product_id" +
+            " inner join product.name_description_translation ndt on p.id = ndt.product_id" +
+            " where pc.currency_id = :currencyId" +
+            "  and ndt.language_id = :languageId" +
+            "  and (lower(ndt.name) like CONCAT('%',:keyWord,'%') OR lower(ndt.description) like CONCAT('%',:keyWord,'%'))", nativeQuery = true)
+        List<ProductEntity> getAllProductsByNameOrDescription(@Param("keyWord") String word,
+                                                              @Param("currencyId") Integer currencyId,
+                                                              @Param("languageId") Integer languageId );
+
 
 }

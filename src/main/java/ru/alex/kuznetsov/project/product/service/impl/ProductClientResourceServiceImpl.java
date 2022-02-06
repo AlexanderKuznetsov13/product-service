@@ -1,5 +1,6 @@
 package ru.alex.kuznetsov.project.product.service.impl;
 
+import liquibase.repackaged.org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import ru.alex.kuznetsov.project.product.dto.NameDescriptionTranslationResponseDto;
 import ru.alex.kuznetsov.project.product.dto.ProductCurrencyResponseDto;
@@ -53,6 +54,23 @@ public class ProductClientResourceServiceImpl implements IProductClientResourceS
         }
 
         return product;
+    }
+
+    @Override
+    public List<ProductFullDetailsResponseDto> getAllProductsByNameOrDescription(String word, Integer languageId, Integer currencyId) {
+        List<ProductResponseDto> list = productService.getAllProductsByNameOrDescription(StringUtils.lowerCase(word), currencyId, languageId);
+
+        List<ProductFullDetailsResponseDto> result = new ArrayList<>();
+        if (list.size() == 0)
+            throw new NoEntityException(String.format("Products are not found with Word: %s, LanguageId: %d, CurrencyId: %d",
+                    word, languageId, currencyId));
+
+        for (int i = 0; i < list.size(); i++) {
+            ProductFullDetailsResponseDto element = getProductById(list.get(i).getId(),  languageId, currencyId);
+            result.add(element);
+        }
+
+        return result;
     }
 
     @Override

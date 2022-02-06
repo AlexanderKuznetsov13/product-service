@@ -8,6 +8,8 @@ public interface IProductClientResourceService {
 
     ProductFullDetailsResponseDto getProductById(Integer productId, Integer languageId, Integer currencyId);
 
+    List<ProductFullDetailsResponseDto> getAllProductsByNameOrDescription(String word, Integer languageId, Integer currencyId);
+
     List<ProductFullDetailsResponseDto> getAllProductsByLanguageAndCurrency(Integer languageId, Integer currencyId);
 
 }

@@ -64,6 +64,11 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    public List<ProductResponseDto> getAllProductsByNameOrDescription(String word, Integer currencyId, Integer languageId) {
+        return productRepository.getAllProductsByNameOrDescription(word, currencyId, languageId).stream().map(CommonMapper::fromProductEntityToProductResponseDto).collect(Collectors.toList());
+    }
+
+    @Override
     public List<ProductResponseDto> getAllProductsByLanguageAndProductId(Integer currencyId, Integer languageId) {
         return productRepository.getTranslationByLanguageAndProductId(currencyId, languageId).stream().map(CommonMapper::fromProductEntityToProductResponseDto).collect(Collectors.toList());
     }
