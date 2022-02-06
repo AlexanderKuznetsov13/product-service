@@ -27,7 +27,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public ProductResponseDto getById(Integer id) {
-        logger.error(String.format("getById - get product with %id", id));
+        logger.error(String.format("getById - get product with %d", id));
         productRepository.findById(id).orElseThrow(() -> new NoEntityException(String.format("Product with ID = %d not found", id)));
         return CommonMapper.fromProductEntityToProductResponseDto(productRepository.getById(id));
     }
@@ -42,7 +42,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public ProductResponseDto update(ProductRequestDto requestDto) {
         ProductEntity product = CommonMapper.fromProductRequestDtoToProductEntity(requestDto);
-        logger.error(String.format("update - update product with %id", product.getId()));
+        logger.error(String.format("update - update product with %d", product.getId()));
         return CommonMapper.fromProductEntityToProductResponseDto(productRepository.save(product));
     }
 

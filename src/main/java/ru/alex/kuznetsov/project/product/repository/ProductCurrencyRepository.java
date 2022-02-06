@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ProductCurrencyRepository extends JpaRepository<ProductCurrencyEntity, Integer> {
 
-    @Query(value ="SELECT pc FROM product.product_currency pc WHERE pc.currency_id = :currencyId AND pc.product_id = :productId", nativeQuery = true)
+    @Query(value ="SELECT * FROM product.product_currency pc WHERE pc.currency_id = :currencyId AND pc.product_id = :productId", nativeQuery = true)
     List<ProductCurrencyEntity> getPriceByCurrencyAndProduct(@Param("productId") int productId, @Param("currencyId") int currencyId );
 
 }

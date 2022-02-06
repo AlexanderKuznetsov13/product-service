@@ -16,5 +16,6 @@
     <include file="changelog/2022_02_06_1310_insert_data_for_currency_table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/2022_02_06_1315_insert_data_for_user_type_table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/2022_02_06_1320_insert_data_for_user_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/2022_02_06_1815_insert_initial_product_for_tables.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

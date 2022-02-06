@@ -27,7 +27,7 @@ public class ProductCurrencyServiceImpl implements IProductCurrencyService {
 
     @Override
     public ProductCurrencyResponseDto getById(Integer id) {
-        logger.error(String.format("getById - get productCurrency with %id", id));
+        logger.error(String.format("getById - get productCurrency with %d", id));
         productCurrencyRepository.findById(id).orElseThrow(() -> new NoEntityException(String.format("ProductCurrency with ID = %d not found", id)));
         return CommonMapper.fromProductCurrencyEntityToProductCurrencyResponseDto(productCurrencyRepository.getById(id));
     }
@@ -42,7 +42,7 @@ public class ProductCurrencyServiceImpl implements IProductCurrencyService {
     @Override
     public ProductCurrencyResponseDto update(ProductCurrencyRequestDto requestDto) {
         ProductCurrencyEntity productCurrency = CommonMapper.fromProductCurrencyRequestDtoToProductCurrencyEntity(requestDto);
-        logger.error(String.format("update - update productCurrency with %id", productCurrency.getId()));
+        logger.error(String.format("update - update productCurrency with %d", productCurrency.getId()));
         return CommonMapper.fromProductCurrencyEntityToProductCurrencyResponseDto(productCurrencyRepository.save(productCurrency));
     }
 

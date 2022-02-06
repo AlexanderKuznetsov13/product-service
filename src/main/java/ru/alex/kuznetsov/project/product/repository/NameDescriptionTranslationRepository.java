@@ -13,6 +13,6 @@ import java.util.List;
 public interface NameDescriptionTranslationRepository extends JpaRepository<NameDescriptionTranslationEntity, Integer> {
 
 
-    @Query(value ="SELECT tr FROM product.name_description_translation tr  WHERE tr.language_id = :languageId AND tr.product_id = :productId", nativeQuery = true)
-    List<NameDescriptionTranslationEntity> getTranslationByLanguageAndProductId(@Param("productId") int productId, @Param("languageId") int languageId );
+    @Query(value ="SELECT * FROM product.name_description_translation tr  WHERE tr.language_id = :languageId AND tr.product_id = :productId", nativeQuery = true)
+    List<NameDescriptionTranslationEntity> getTranslationByLanguageAndProductId(@Param("productId") Integer productId, @Param("languageId") Integer languageId );
 }

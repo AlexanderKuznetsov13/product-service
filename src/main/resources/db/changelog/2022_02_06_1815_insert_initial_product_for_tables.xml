@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="2022_02_06_1815_insert_1st_product" author="alex.kuznetsov"  dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="product" tableName="user"/>
+            <sqlCheck expectedResult="0">
+                select count(1)
+                from product.product
+                where id = 1
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            INSERT INTO product.product (id, creation_date, last_modification_date)
+            VALUES (nextval('product.product_seq'), now(), now() );
+
+            INSERT INTO product.product_currency (id, product_id, currency_id, price)
+            VALUES (nextval('product.product_currency_seq'), 1, 1, 100 );
+
+            INSERT INTO product.product_currency (id, product_id, currency_id, price)
+            VALUES (nextval('product.product_currency_seq'), 1, 2, 2 );
+
+            INSERT INTO product.name_description_translation (id, product_id, name, description, language_id)
+            VALUES (nextval('product.name_description_translation_seq'), 1, 'Карандаш', 'Пластиковый карандаш', 1 );
+
+            INSERT INTO product.name_description_translation (id, product_id, name, description, language_id)
+            VALUES (nextval('product.name_description_translation_seq'), 1, 'Pencil', 'Plastic pencil', 2 );
+
+
+            INSERT INTO product.product (id, creation_date, last_modification_date)
+            VALUES (nextval('product.product_seq'), now(), now() );
+
+            INSERT INTO product.product_currency (id, product_id, currency_id, price)
+            VALUES (nextval('product.product_currency_seq'), 2, 1, 100 );
+
+            INSERT INTO product.product_currency (id, product_id, currency_id, price)
+            VALUES (nextval('product.product_currency_seq'), 2, 2, 2 );
+
+            INSERT INTO product.name_description_translation (id, product_id, name, description, language_id)
+            VALUES (nextval('product.name_description_translation_seq'), 2, 'Бумага', 'Туалетная бумага', 1 );
+
+            INSERT INTO product.name_description_translation (id, product_id, name, description, language_id)
+            VALUES (nextval('product.name_description_translation_seq'), 2, 'Paper', 'Toilet paper', 2 );
+
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

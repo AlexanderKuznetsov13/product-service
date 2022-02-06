@@ -27,7 +27,7 @@ public class NameDescriptionTranslationServiceImpl implements INameDescriptionTr
 
     @Override
     public NameDescriptionTranslationResponseDto getById(Integer id) {
-        logger.error(String.format("getById - get nameDescriptionTranslation with %id", id));
+        logger.error(String.format("getById - get nameDescriptionTranslation with %d", id));
         nameDescriptionTranslationRepository.findById(id).orElseThrow(() -> new NoEntityException(String.format("NameDescriptionTranslation with ID = %d not found", id)));
         return CommonMapper.fromNameDescriptionTranslationEntityToNameDescriptionTranslationResponseDto(nameDescriptionTranslationRepository.getById(id));
     }
@@ -42,7 +42,7 @@ public class NameDescriptionTranslationServiceImpl implements INameDescriptionTr
     @Override
     public NameDescriptionTranslationResponseDto update(NameDescriptionTranslationRequestDto requestDto) {
         NameDescriptionTranslationEntity nameDescriptionTranslation = CommonMapper.fromNameDescriptionTranslationRequestDtoToNameDescriptionTranslationEntity(requestDto);
-        logger.error(String.format("update - update nameDescriptionTranslation with %id", nameDescriptionTranslation.getId()));
+        logger.error(String.format("update - update nameDescriptionTranslation with %d", nameDescriptionTranslation.getId()));
         return CommonMapper.fromNameDescriptionTranslationEntityToNameDescriptionTranslationResponseDto(nameDescriptionTranslationRepository.save(nameDescriptionTranslation));
     }
 

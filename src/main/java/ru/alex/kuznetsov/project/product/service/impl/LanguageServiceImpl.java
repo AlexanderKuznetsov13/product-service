@@ -27,7 +27,7 @@ public class LanguageServiceImpl implements ILanguageService {
 
     @Override
     public LanguageResponseDto getById(Integer id) {
-        logger.error(String.format("getById - get language with %id", id));
+        logger.error(String.format("getById - get language with %d", id));
         languageRepository.findById(id).orElseThrow(() -> new NoEntityException(String.format("Language with ID = %d not found", id)));
         return CommonMapper.fromLanguageEntityToLanguageResponseDto(languageRepository.getById(id));
     }
@@ -42,7 +42,7 @@ public class LanguageServiceImpl implements ILanguageService {
     @Override
     public LanguageResponseDto update(LanguageRequestDto requestDto) {
         LanguageEntity language = CommonMapper.fromLanguageRequestDtoToLanguageEntity(requestDto);
-        logger.error(String.format("update - update language with %id", language.getId()));
+        logger.error(String.format("update - update language with %d", language.getId()));
         return CommonMapper.fromLanguageEntityToLanguageResponseDto(languageRepository.save(language));
     }
 

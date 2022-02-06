@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 
 @Schema(description = "Продукт")
-public class ProductFullDetailsResponseDto extends ProductRequestDto {
+public class ProductFullDetailsResponseDto extends ProductResponseDto {
 
     @Schema(description = "Название")
     private String name;
@@ -24,6 +24,10 @@ public class ProductFullDetailsResponseDto extends ProductRequestDto {
     private String languageName;
 
     public ProductFullDetailsResponseDto() {
+    }
+
+    public ProductFullDetailsResponseDto(ProductResponseDto product) {
+        super(product.getId(),product.getCreationDate(), product.getLastModificationDate());
     }
 
     public ProductFullDetailsResponseDto(String name, String description, Float price, String currencyName, String languageName) {

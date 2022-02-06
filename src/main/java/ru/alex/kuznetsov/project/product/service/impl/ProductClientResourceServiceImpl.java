@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.alex.kuznetsov.project.product.dto.NameDescriptionTranslationResponseDto;
 import ru.alex.kuznetsov.project.product.dto.ProductCurrencyResponseDto;
 import ru.alex.kuznetsov.project.product.dto.ProductFullDetailsResponseDto;
+import ru.alex.kuznetsov.project.product.dto.ProductResponseDto;
+import ru.alex.kuznetsov.project.product.entity.ProductEntity;
 import ru.alex.kuznetsov.project.product.exception.NoEntityException;
 import ru.alex.kuznetsov.project.product.service.*;
 
@@ -28,13 +30,15 @@ public class ProductClientResourceServiceImpl implements IProductClientResourceS
 
     @Override
     public ProductFullDetailsResponseDto getProductById(Integer productId, Integer languageId, Integer currencyId) {
-        ProductFullDetailsResponseDto product = new ProductFullDetailsResponseDto();
+        ProductFullDetailsResponseDto product = null;
+        ProductResponseDto tProduct = productService.getById(productId);
         List<NameDescriptionTranslationResponseDto> details = nameDescriptionTranslationService.getTranslationByLanguageAndProductId(productId, languageId);
         List<ProductCurrencyResponseDto> prices = productCurrencyService.getPriceByCurrencyAndProduct(productId, currencyId);
 
         if (details.size()>0 && prices.size()>0) {
             NameDescriptionTranslationResponseDto detail = details.get(0);
             ProductCurrencyResponseDto price = prices.get(0);
+            product = new ProductFullDetailsResponseDto(tProduct);
             product.setName(detail.getName());
             product.setDescription(detail.getDescription());
             product.setPrice(price.getPrice());
